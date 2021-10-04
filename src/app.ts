@@ -1,10 +1,12 @@
 import express, { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { customers, ICustomer } from "./data";
+import cors from "cors";
 
 require("dotenv").config();
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 //get all customers
