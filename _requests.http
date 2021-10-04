@@ -14,7 +14,10 @@ POST {{URL}}/api/customers
 Content-Type: application/json
 
 {
-    "id":6,
+    "id":2,
     "firstname":"Joe",
     "lastname":"Mama"
 }
+
+### delete customer
+DELETE {{URL}}/api/customers/1

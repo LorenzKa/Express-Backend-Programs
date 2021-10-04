@@ -31,27 +31,36 @@ app.post("/api/customers", (req, res) => {
     res.status(StatusCodes.BAD_REQUEST).send("Mandatory fields missing");
   } else {
     const newCustomerId = parseInt(req.body.id);
-    if(customers.find((c) => c.id === newCustomerId)){
-      res.status(StatusCodes.BAD_REQUEST).send("already exists")
-    }
-    else{
-    if (!newCustomerId) {
-      res.status(StatusCodes.BAD_REQUEST).send("Id has to be a number");
+    if (customers.find((c) => c.id === newCustomerId)) {
+      res.status(StatusCodes.BAD_REQUEST).send("already exists");
     } else {
-      const newCustomer: ICustomer = {
-        id: newCustomerId,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-      };
-      customers.push(newCustomer);
-      res
-        .status(StatusCodes.CREATED)
-        .header({ Location: `${req.path}/${req.body.id}` })
-        .send(newCustomer);
+      if (!newCustomerId) {
+        res.status(StatusCodes.BAD_REQUEST).send("Id has to be a number");
+      } else {
+        const newCustomer: ICustomer = {
+          id: newCustomerId,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+        };
+        customers.push(newCustomer);
+        res
+          .status(StatusCodes.CREATED)
+          .header({ Location: `${req.path}/${req.body.id}` })
+          .send(newCustomer);
+      }
     }
-  }
   }
 });
+app.delete('/api/customers/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  if(!id){
+    res.status(StatusCodes.BAD_REQUEST).send('Parameter id must be a number')
+  }
+  else{
+    customers.splice(id-1, 1)
+    res.status(StatusCodes.NO_CONTENT).send();
+  }
+})
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
