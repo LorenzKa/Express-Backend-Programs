@@ -31,6 +31,10 @@ app.post("/api/customers", (req, res) => {
     res.status(StatusCodes.BAD_REQUEST).send("Mandatory fields missing");
   } else {
     const newCustomerId = parseInt(req.body.id);
+    if(customers.find((c) => c.id === newCustomerId)){
+      res.status(StatusCodes.BAD_REQUEST).send("already exists")
+    }
+    else{
     if (!newCustomerId) {
       res.status(StatusCodes.BAD_REQUEST).send("Id has to be a number");
     } else {
@@ -45,6 +49,7 @@ app.post("/api/customers", (req, res) => {
         .header({ Location: `${req.path}/${req.body.id}` })
         .send(newCustomer);
     }
+  }
   }
 });
 app.listen(process.env.PORT, () => {
