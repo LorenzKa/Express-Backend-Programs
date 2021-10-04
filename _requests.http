@@ -1,0 +1,9 @@
+@URL = http://localhost:8000
+### get all customers
+GET {{URL}}/api/customers
+
+### get single customers
+GET {{URL}}/api/customers/2
+
+### get single customers
+GET {{URL}}/api/customers/asdf
