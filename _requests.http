@@ -5,5 +5,16 @@ GET {{URL}}/api/customers
 ### get single customers
 GET {{URL}}/api/customers/2
 
-### get single customers
+### get id out of range
+GET {{URL}}/api/customers/100
+### get invalid id
 GET {{URL}}/api/customers/asdf
+### create customer
+POST {{URL}}/api/customers
+Content-Type: application/json
+
+{
+    "id":6,
+    "firstname":"Joe",
+    "lastname":"Mama"
+}
