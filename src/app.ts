@@ -1,16 +1,17 @@
 import express, { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { customers, ICustomer } from "./data";
+import * as data from "./data";
 import cors from "cors";
 
 require("dotenv").config();
+data.read()
 
 const app = express();
 app.use(cors())
 app.use(express.json());
 
 //get all customers
-app.get("/api/customers", (req, res) => {
+/*app.get("/api/customers", (req, res) => {
   res.json(customers);
 });
 
@@ -66,3 +67,4 @@ app.delete('/api/customers/:id', (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
+*/
