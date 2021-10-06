@@ -2,33 +2,49 @@ import express, { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as data from "./data";
 import cors from "cors";
+import { parse } from "path/posix";
 
 require("dotenv").config();
 data.read()
-
 const app = express();
 app.use(cors())
 app.use(express.json());
 
-//get all customers
-/*app.get("/api/customers", (req, res) => {
-  res.json(customers);
+//Get all playlists
+app.get("/api/playlists", (req, res) => {
+  res.send(data.playlists)
 });
 
-//get single customer
-app.get("/api/customers/:id", (req: Request, res: Response) => {
+//Get tracks for a playlist
+app.get("/api/playlisttracks/:id", (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   if (id) {
-    const customer = customers.find((c) => c.id === id);
-    if (customer) {
-      res.status(StatusCodes.OK).send(customer);
+    const filteredTracks = data.playlistTracks.filter((c) => c.PlaylistId === id);
+    if (filteredTracks.length > 0) {
+      res.status(StatusCodes.OK).send(filteredTracks);
     } else {
       res.status(StatusCodes.NOT_FOUND).send();
     }
   } else {
-    res.status(StatusCodes.BAD_REQUEST).send("Give me a number");
+    res.status(StatusCodes.BAD_REQUEST).send("Send number");
   }
 });
+
+//Get available genres
+app.get("/api/genres", (req: Request, res: Response) => {
+  res.send(data.genres)
+});
+//Get tracks for a certain genre
+app.get("/api/tracks", (req: Request, res: Response) => {
+  const genreId = parseInt(req.query.genreid + '')
+  if(genreId){
+    res.send(data.tracks.filter(x => x.GenreId == genreId))
+  }
+  else{
+    res.status(StatusCodes.BAD_REQUEST).send("Send number")
+  }
+});
+/*
 app.post("/api/customers", (req, res) => {
   if (!req.body.id || !req.body.firstname || !req.body.lastname) {
     res.status(StatusCodes.BAD_REQUEST).send("Mandatory fields missing");
@@ -64,7 +80,7 @@ app.delete('/api/customers/:id', (req, res) => {
     res.status(StatusCodes.NO_CONTENT).send();
   }
 })
+*/
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
-*/

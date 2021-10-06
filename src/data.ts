@@ -28,11 +28,11 @@ export interface IPlaylist {
   PlaylistId: number;
   Name: string;
 }
-let albums: IAlbum[] = [];
-let genres: IGenre[] = [];
-let playlistTracks: IPlaylistTrack[] = []
-let playlists: IPlaylist[] = []
-let tracks: ITrack[] = []
+export let albums: IAlbum[] = [];
+export let genres: IGenre[] = [];
+export let playlistTracks: IPlaylistTrack[] = []
+export let playlists: IPlaylist[] = []
+export let tracks: ITrack[] = []
 export function read() {
   fs.readFile(path + "album.csv", "utf8", function (err: any, data: any) {
     var lines = data.split(/\r?\n/);
@@ -94,7 +94,6 @@ export function read() {
         Bytes: +brackets[7],
         UnitPrice: +brackets[8]
       };
-      console.log(brackets)
       tracks.push(newTrack);
     }
   });
