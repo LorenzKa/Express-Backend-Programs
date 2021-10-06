@@ -1,28 +1,35 @@
-export interface ICustomer {
-    id: number;
-    firstname: string;
-    lastname: string;
-}
+var fs = require('fs')
 
-export const customers: ICustomer[] = [
-    {
-        id: 1,
-        firstname: 'Hans',
-        lastname: 'Meyer',
-    },
-    {
-        id: 2,
-        firstname: 'Rainer',
-        lastname: 'Zufall',
-    },
-    {
-        id: 3,
-        firstname: 'Max',
-        lastname: 'Franz',
-    },
-    {
-        id: 4,
-        firstname: 'Jakob',
-        lastname: 'Schlager',
-    },
-]
+export interface IAlbum {
+    AlbumId: number;
+    Title: string;
+    ArtistId: number;
+}
+export interface IGenre {
+    GenreId: number;
+    Name: string;
+}
+export interface ITracks {
+    TrackId: number,
+    Name: string,
+    AlbumId: number,
+    MediaTypeId: number,
+    GenreId: number,
+    Composer: string,
+    Milliseconds: number,
+    Bytes: number,
+    UnitPrice: number
+}
+export interface IPlaylistTracks {
+    PlaylistId: number,
+    TrackId: number
+}
+export interface IAlbum {
+    AlbumId: number,
+    Title: string,
+    ArtistId: number
+}
+export function read(){
+    
+
+}
