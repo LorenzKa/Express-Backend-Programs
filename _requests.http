@@ -13,6 +13,7 @@ Content-Type: application/json
 ### Add a new track to a playlist
 POST http://localhost:8000/api/track
 Content-Type: application/json
+
 {
 "playlistid": 5,
 "trackid": 10

@@ -28,12 +28,13 @@ export interface IPlaylist {
   PlaylistId: number;
   Name: string;
 }
-export let albums: IAlbum[] = [];
-export let genres: IGenre[] = [];
-export let playlistTracks: IPlaylistTrack[] = []
-export let playlists: IPlaylist[] = []
-export let tracks: ITrack[] = []
-export function read() {
+
+
+
+
+
+export function readAlbums() {
+  let albums: IAlbum[] = [];
   fs.readFile(path + "album.csv", "utf8", function (err: any, data: any) {
     var lines = data.split(/\r?\n/);
     for (let i = 1; i < lines.length; i++) {
@@ -46,6 +47,10 @@ export function read() {
       albums.push(newAlbum);
     }
   });
+  return albums
+}
+export function readGenres(){
+  let genres: IGenre[] = [];
   fs.readFile(path + "genre.csv", "utf8", function (err: any, data: any) {
     var lines = data.split(/\r?\n/);
     for (let i = 1; i < lines.length; i++) {
@@ -57,6 +62,10 @@ export function read() {
       genres.push(newgenre);
     }
   });
+  return genres
+}
+export function readPlaylistTracks(){
+  let playlistTracks: IPlaylistTrack[] = []
   fs.readFile(path + "playlist-track.csv", "utf8", function (err: any, data: any) {
     var lines = data.split(/\r?\n/);
     for (let i = 1; i < lines.length; i++) {
@@ -68,6 +77,10 @@ export function read() {
       playlistTracks.push(newPlaylistTrack);
     }
   });
+  return playlistTracks
+}
+export function readPlaylists(){
+  let playlists: IPlaylist[] = []
   fs.readFile(path + "playlist.csv", "utf8", function (err: any, data: any) {
     var lines = data.split(/\r?\n/);
     for (let i = 1; i < lines.length; i++) {
@@ -79,6 +92,10 @@ export function read() {
       playlists.push(newPlaylist);
     }
   });
+  return playlists
+}
+export function readTracks(){
+  let tracks: ITrack[] = []
   fs.readFile(path + "track.csv", "utf8", function (err: any, data: any) {
     var lines = data.split(/\r?\n/);
     for (let i = 1; i < lines.length; i++) {
@@ -97,4 +114,6 @@ export function read() {
       tracks.push(newTrack);
     }
   });
+  return tracks;
 }
+
